@@ -8,6 +8,9 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./styles/shared.css";
+import {
+  links as productLinks,
+} from "~/components/productList";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -15,7 +18,7 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export const links = () => [{ rel: "stylesheet", href: styles }];
+export const links = () => [..{ rel: "stylesheet", href: styles }];
 
 export default function App() {
   return (

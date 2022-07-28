@@ -9,8 +9,6 @@ export const loader: LoaderFunction = async () => {
 export default function Shop() {
   const categories = useLoaderData<string[]>();
 
-  console.log(categories);
-
   return (
     <div>
       <div>

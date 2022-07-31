@@ -18,7 +18,7 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export const links = () => [..{ rel: "stylesheet", href: styles }];
+export const links = () => [...productLinks(), { rel: "stylesheet", href: styles }];
 
 export default function App() {
   return (

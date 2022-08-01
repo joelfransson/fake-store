@@ -1,5 +1,5 @@
 import { LoaderArgs, LoaderFunction } from "@remix-run/node";
-import { useLoaderData, useParams } from "@remix-run/react";
+import { Outlet, useLoaderData, useParams, Link } from "@remix-run/react";
 import { fetchProducts, Product } from "~/api/products";
 
 export const loader: LoaderFunction = async ({ params }: LoaderArgs) => {
@@ -26,7 +26,9 @@ export default function Category() {
             {products.map((product) => (
               <li key={product.id}>
                 <div className="flex justify-between">
-                  <div className="font-semibold">{product.title}</div>
+                  <div className="font-semibold">
+                    <Link to={`product/${product.id}`}>{product.title}</Link>
+                  </div>
                   <div className="font-semibold text-gray-400">
                     ${product.price}
                   </div>
@@ -35,7 +37,9 @@ export default function Category() {
             ))}
           </ul>
         </div>
-        <div>DETAILS</div>
+        <div>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

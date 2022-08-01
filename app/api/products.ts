@@ -15,3 +15,10 @@ export const fetchProducts = async (category: string): Promise<Product[]> => {
   const products = await productsResponse.json();
   return products;
 };
+
+export const fetchProduct = async (productId: string): Promise<Product> => {
+  const productResponse = await fetch(
+    `https://fakestoreapi.com/products/${productId}`
+  );
+  return await productResponse.json();
+};

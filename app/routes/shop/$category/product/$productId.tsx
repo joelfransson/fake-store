@@ -22,5 +22,18 @@ export default function ProductDetails() {
     <div>No product selected</div>;
   }
 
-  return <div>{product.title}</div>;
+  console.log({ product });
+
+  return (
+    <div>
+      <div className="w-12">
+        <img src={product.image} alt="" />
+      </div>
+      <div className="flex justify-between font-semibold">
+        <div>{product.title}</div>
+        <div className="text-gray-500">${product.price}</div>
+      </div>
+      <div className="text-gray-400">{product.description}</div>
+    </div>
+  );
 }

@@ -1,5 +1,11 @@
 import { LoaderArgs, LoaderFunction } from "@remix-run/node";
-import { Outlet, useLoaderData, useParams, Link } from "@remix-run/react";
+import {
+  Outlet,
+  useLoaderData,
+  useParams,
+  Link,
+  useOutlet,
+} from "@remix-run/react";
 import { fetchProducts, Product } from "~/api/products";
 
 export const loader: LoaderFunction = async ({ params }: LoaderArgs) => {
@@ -17,6 +23,7 @@ export function ErrorBoundary({ error }: any) {
 export default function Category() {
   const params = useParams();
   const products = useLoaderData<Product[]>();
+  const outlet = useOutlet();
 
   return (
     <div className="pt-5">
@@ -29,16 +36,13 @@ export default function Category() {
                   <div className="font-semibold">
                     <Link to={`product/${product.id}`}>{product.title}</Link>
                   </div>
-                  <div className="font-semibold text-gray-400">
-                    ${product.price}
-                  </div>
                 </div>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <Outlet />
+          {outlet ?? <div className="text-gray-400">No product selected</div>}
         </div>
       </div>
     </div>

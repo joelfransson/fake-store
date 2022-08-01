@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction, LinksFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,10 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import styles from "./styles/shared.css";
-import {
-  links as productLinks,
-} from "~/components/productList";
+import styles from "./tailwind.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -18,7 +15,7 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export const links = () => [...productLinks(), { rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export default function App() {
   return (
@@ -28,8 +25,12 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>FakeStore</h1>
-        <Outlet />
+        <div className="bg-sky-100 p-5">
+          <h1 className="text-2xl">FakeStore</h1>
+        </div>
+        <div className="p-5">
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

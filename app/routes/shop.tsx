@@ -6,10 +6,9 @@ export const loader: LoaderFunction = async () => {
   return fetchCategories();
 };
 
-export function ErrorBoundary({ error }: any) {
-  console.error(error);
+export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <div className="text-red-400">Error: Failed to product categories</div>
+    <div className="text-red-400">Error: Failed to load product categories</div>
   );
 }
 

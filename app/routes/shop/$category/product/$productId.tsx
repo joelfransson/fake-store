@@ -1,31 +1,28 @@
 import { LoaderArgs, LoaderFunction } from "@remix-run/node";
-import { useLoaderData, useParams } from "@remix-run/react";
+import { useLoaderData, Form } from "@remix-run/react";
+import invariant from "tiny-invariant";
 import { fetchProduct, Product } from "~/api/products";
 
 export const loader: LoaderFunction = async ({ params }: LoaderArgs) => {
-  if (!params?.productId) {
-    return null;
-  }
+  invariant(params?.productId, "Expected params.productId");
+
   return fetchProduct(params.productId);
 };
 
-export function ErrorBoundary({ error }: any) {
+export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
   return <div className="text-red-400">Error: Failed to load product list</div>;
 }
 
 export default function ProductDetails() {
-  const params = useParams();
   const product = useLoaderData<Product>();
 
   if (!product) {
     <div>No product selected</div>;
   }
 
-  console.log({ product });
-
   return (
-    <div>
+    <div className="flex flex-col gap-y-3">
       <div className="w-12">
         <img src={product.image} alt="" />
       </div>
@@ -34,6 +31,19 @@ export default function ProductDetails() {
         <div className="text-gray-500">${product.price}</div>
       </div>
       <div className="text-gray-400">{product.description}</div>
+      <div>
+        <Form method="post" action="/shop/basket">
+          <input type="hidden" name="quantity" value={1} />
+          <input type="hidden" name="productId" value={product.id} />
+          <input type="hidden" name="productTitle" value={product.title} />
+          <button
+            className="h-10 px-6 font-semibold rounded-md bg-black text-white"
+            type="submit"
+          >
+            Buy
+          </button>
+        </Form>
+      </div>
     </div>
   );
 }

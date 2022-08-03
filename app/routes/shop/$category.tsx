@@ -1,27 +1,20 @@
 import { LoaderArgs, LoaderFunction } from "@remix-run/node";
-import {
-  Outlet,
-  useLoaderData,
-  useParams,
-  Link,
-  useOutlet,
-} from "@remix-run/react";
+import { useLoaderData, Link, useOutlet } from "@remix-run/react";
+import invariant from "tiny-invariant";
 import { fetchProducts, Product } from "~/api/products";
 
 export const loader: LoaderFunction = async ({ params }: LoaderArgs) => {
-  if (!params?.category) {
-    return [];
-  }
+  invariant(params?.category, "Expected params.category");
+
   return fetchProducts(params.category);
 };
 
-export function ErrorBoundary({ error }: any) {
+export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
   return <div className="text-red-400">Error: Failed to load product list</div>;
 }
 
 export default function Category() {
-  const params = useParams();
   const products = useLoaderData<Product[]>();
   const outlet = useOutlet();
 

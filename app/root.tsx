@@ -1,5 +1,6 @@
 import type { MetaFunction, LinksFunction } from "@remix-run/node";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -26,7 +27,12 @@ export default function App() {
       </head>
       <body>
         <div className="bg-sky-100 p-5">
-          <h1 className="text-2xl">FakeStore</h1>
+          <Link to="/">
+            <h1 className="text-2xl">FakeStore</h1>
+          </Link>
+          <Link to="/shop/basket">
+            <h1 className="text-l">cart</h1>
+          </Link>
         </div>
         <div className="p-5">
           <Outlet />

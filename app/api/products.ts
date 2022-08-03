@@ -13,6 +13,7 @@ export const fetchProducts = async (category: string): Promise<Product[]> => {
     `https://fakestoreapi.com/products/category/${category}`
   );
   const products = await productsResponse.json();
+  cache = products;
   return products;
 };
 

@@ -18,7 +18,6 @@ export async function action({ request }: { request: Request }) {
   const price = body.get("productPrice");
   const quantity = body.get("quantity") ?? 1;
 
-  console.log("AAAAA", id, action)
   if(action === "delete") {
     return deleteFromCard(Number(id))
   } else {
@@ -50,8 +49,6 @@ export const loader: LoaderFunction = async () => {
     (sum, item) => (item.quantity ?? 0) * (item.price ?? 0) + sum,
     0
   );
-
-  console.log({ total });
 
   return {
     items,

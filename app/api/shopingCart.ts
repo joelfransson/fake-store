@@ -1,6 +1,7 @@
 export type Order = {
   id: number;
   title: string;
+  price: number;
   quantity: number;
 };
 
@@ -25,6 +26,7 @@ export function addToCard(order: Order) {
     shoppingBag[Number(order.id)] = {
       id: order.id,
       title: order.title,
+      price: order.price,
       quantity: 0,
     };
   }

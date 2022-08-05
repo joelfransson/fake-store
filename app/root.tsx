@@ -8,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { ShoppingCartIcon } from "@heroicons/react/solid";
 import styles from "./tailwind.css";
 
 export const meta: MetaFunction = () => ({
@@ -26,12 +27,15 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div className="bg-sky-100 p-5">
+        <div className="bg-sky-100 p-5 flex justify-between align-middle">
           <Link to="/">
             <h1 className="text-2xl">FakeStore</h1>
           </Link>
-          <Link to="/shop/basket">
-            <h1 className="text-l">cart</h1>
+          <Link to="/shop" className="flex align-middle">
+            shop
+          </Link>
+          <Link to="/shop/basket" className="flex align-middle">
+            <ShoppingCartIcon className="h-6 w-6 text-gray-700 line" />
           </Link>
         </div>
         <div className="p-5">

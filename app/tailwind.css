@@ -558,6 +558,14 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .flex {
   display: flex;
 }
@@ -570,8 +578,16 @@ video {
   display: none;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
 .h-10 {
   height: 2.5rem;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-12 {
@@ -633,9 +649,22 @@ video {
   padding-top: 1.25rem;
 }
 
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -652,6 +681,11 @@ video {
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
 .text-red-400 {

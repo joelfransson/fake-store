@@ -1,7 +1,8 @@
-import { LoaderArgs, LoaderFunction } from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { useLoaderData, Form } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import { fetchProduct, Product } from "~/api/products";
+import type { Product } from "~/api/products";
+import  { fetchProduct } from "~/api/products";
 
 export const loader: LoaderFunction = async ({ params }: LoaderArgs) => {
   invariant(params?.productId, "Expected params.productId");
@@ -36,6 +37,7 @@ export default function ProductDetails() {
           <input type="hidden" name="quantity" value={1} />
           <input type="hidden" name="productId" value={product.id} />
           <input type="hidden" name="productTitle" value={product.title} />
+          <input type="hidden" name="productPrice" value={product.price} />
           <button
             className="h-10 px-6 font-semibold rounded-md bg-black text-white"
             type="submit"

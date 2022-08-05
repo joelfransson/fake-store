@@ -1,4 +1,4 @@
-import { LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 import { Outlet, useLoaderData, NavLink } from "@remix-run/react";
 import { fetchCategories } from "~/api/categories";
 

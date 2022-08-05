@@ -1,7 +1,8 @@
-import { LoaderArgs, LoaderFunction } from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { useLoaderData, Link, useOutlet } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import { fetchProducts, Product } from "~/api/products";
+import type { Product } from "~/api/products";
+import { fetchProducts } from "~/api/products";
 
 export const loader: LoaderFunction = async ({ params }: LoaderArgs) => {
   invariant(params?.category, "Expected params.category");
@@ -22,13 +23,16 @@ export default function Category() {
     <div className="pt-5">
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <div>
-          <ul className="">
+          <ul>
             {products.map((product) => (
               <li key={product.id}>
                 <div className="flex justify-between">
                   <div className="font-semibold">
                     <Link to={`product/${product.id}`}>{product.title}</Link>
                   </div>
+                </div>
+                <div className="pt-5 pb-5">
+                  <hr></hr>
                 </div>
               </li>
             ))}

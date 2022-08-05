@@ -34,3 +34,9 @@ export function addToCard(order: Order) {
 
   return shoppingBag;
 }
+
+export function deleteFromCard(id: number) {
+  delete shoppingBag[id]
+
+  return shoppingBag;
+}

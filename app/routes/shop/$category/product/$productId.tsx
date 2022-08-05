@@ -1,5 +1,5 @@
 import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
-import { useLoaderData, Form } from "@remix-run/react";
+import { useLoaderData, Form, useTransition } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import type { Product } from "~/api/products";
 import  { fetchProduct } from "~/api/products";
@@ -17,6 +17,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
 export default function ProductDetails() {
   const product = useLoaderData<Product>();
+  const transition = useTransition();
 
   if (!product) {
     <div>No product selected</div>;
@@ -34,6 +35,7 @@ export default function ProductDetails() {
       <div className="text-gray-400">{product.description}</div>
       <div>
         <Form method="post" action="/shop/basket">
+          <input type="hidden" name="action" value="add" />
           <input type="hidden" name="quantity" value={1} />
           <input type="hidden" name="productId" value={product.id} />
           <input type="hidden" name="productTitle" value={product.title} />
@@ -41,8 +43,11 @@ export default function ProductDetails() {
           <button
             className="h-10 px-6 font-semibold rounded-md bg-black text-white"
             type="submit"
+            disabled={transition.submission !== undefined}
           >
-            Buy
+            {transition.submission
+            ? "Buying..."
+            : "Buy"}
           </button>
         </Form>
       </div>

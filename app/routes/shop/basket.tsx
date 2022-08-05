@@ -1,5 +1,5 @@
 import type { LoaderFunction } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData, useTransition } from "@remix-run/react";
 import { XIcon } from "@heroicons/react/solid";
 import { addToCard, deleteFromCard, loadCart } from "~/api/shopingCart";
 import type { Order } from "~/api/shopingCart";
@@ -61,8 +61,8 @@ export function ErrorBoundary({ error }: { error: Error }) {
 }
 
 export default function Index() {
+  const transition = useTransition();
   const cartInfo = useLoaderData<CartInfo>() ?? {};
-  const actionData = useActionData() ?? {};
 
   return (
     <div>
@@ -76,10 +76,10 @@ export default function Index() {
                   <div className="flex justify-between">
                     <div>{item.quantity} {item.title} ${item.price ?? 0}</div>
                     <div>
-                      <Form method="post">
+                      {transition.state === "idle" && <Form method="post">
                         <input type="hidden" name="productId" value={item.id} />
-                        <button type="submit" name="action" value="delete"><XIcon className="h-6 w-6 text-red-400 line" /></button>
-                      </Form>
+                        <button type="submit" name="action" value="delete" disabled={transition.state !== "idle"}><XIcon className="h-6 w-6 text-red-400 line" /></button>
+                      </Form>}
                     </div>  
                   </div>
                 </li>
